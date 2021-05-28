@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\NSK\\source\\repos\\WebAPIDemo\\WebAPIDemo.csproj": {}
+    "N:\\Work\\Git\\WebAPIDemo\\WebAPIDemo.csproj": {}
   },
   "projects": {
-    "C:\\Users\\NSK\\source\\repos\\WebAPIDemo\\WebAPIDemo.csproj": {
+    "N:\\Work\\Git\\WebAPIDemo\\WebAPIDemo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\NSK\\source\\repos\\WebAPIDemo\\WebAPIDemo.csproj",
+        "projectUniqueName": "N:\\Work\\Git\\WebAPIDemo\\WebAPIDemo.csproj",
         "projectName": "WebAPIDemo",
-        "projectPath": "C:\\Users\\NSK\\source\\repos\\WebAPIDemo\\WebAPIDemo.csproj",
+        "projectPath": "N:\\Work\\Git\\WebAPIDemo\\WebAPIDemo.csproj",
         "packagesPath": "C:\\Users\\NSK\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\NSK\\source\\repos\\WebAPIDemo\\obj\\",
+        "outputPath": "N:\\Work\\Git\\WebAPIDemo\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -62,18 +62,20 @@ namespace WebAPIDemo.Controllers
         public StudentDetailsResponse GetStudentDetails([Required] int ID)
         {
             StudentDetailsResponse studentsResponse = new StudentDetailsResponse();
-
-
-            string query = string.Format(Queries.GetQuery(2), ID.ToString());
-            DataTable studentDT = db.GetData(query);
-            if (studentDT != null && studentDT.Rows != null && studentDT.Rows.Count > 0)
+            if(ID>0)
             {
-                studentsResponse.students = Utilities.ConvertDataTable<Student>(studentDT);
+                string query = string.Format(Queries.GetQuery(2), ID.ToString());
+                DataTable studentDT = db.GetData(query);
+                if (studentDT != null && studentDT.Rows != null && studentDT.Rows.Count > 0)
+                {
+                    studentsResponse.students = Utilities.ConvertDataTable<Student>(studentDT);
+                }
+                else
+                {
+                    //throw new System.Web.Http.HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound) { Content=new StringContent("ID " + ID + " does not exists."),ReasonPhrase="Student details not found" });
+                }
             }
-            else
-            {
-                //throw new System.Web.Http.HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound) { Content=new StringContent("ID " + ID + " does not exists."),ReasonPhrase="Student details not found" });
-            }
+
 
             return studentsResponse;
 
@@ -88,7 +90,7 @@ namespace WebAPIDemo.Controllers
         public bool UpdateStudent(StudentDetailsUpdateRequest studentDetailsUpdateRequest)
         {
             bool updated = false;
-            if (ModelState.IsValid)
+            if (studentDetailsUpdateRequest!=null && studentDetailsUpdateRequest.ID>0)
             {
                 string query = Queries.GetQuery(200);
                 query=query.Replace("{id}", studentDetailsUpdateRequest.ID.ToString());
@@ -132,7 +134,7 @@ namespace WebAPIDemo.Controllers
         public bool DeleteStudent([Required] int ID)
         {
             bool deleted = false;
-            if (ModelState.IsValid)
+            if (ID>0)
             {
                 string query = String.Format(Queries.GetQuery(300), ID);
 
@@ -152,7 +154,7 @@ namespace WebAPIDemo.Controllers
         public bool AddStudent(AddStudentRequest studentDetails)
         {
             bool added = false;
-            if (ModelState.IsValid)
+            if (studentDetails!=null)
             {
                 string query = String.Format(Queries.GetQuery(100), studentDetails.Name, studentDetails.DOB.Year.ToString() + "/" + (studentDetails.DOB.Month).ToString() +"/"+ studentDetails.DOB.Day.ToString(),studentDetails.Score.GetValueOrDefault());
 
