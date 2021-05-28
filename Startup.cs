@@ -10,8 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebAPIDemo.Controllers;
 using WebAPIDemo.Interface;
+using WebAPIDemo.Services;
 
 namespace WebAPIDemo
 {
@@ -28,7 +28,7 @@ namespace WebAPIDemo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSingleton<IStudentInterface, StudentController>();
+            services.AddSingleton<IStudentInterface, StudentService>();
             services.AddSwaggerGen();
         }
 
