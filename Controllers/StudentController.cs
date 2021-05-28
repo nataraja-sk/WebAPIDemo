@@ -24,9 +24,9 @@ namespace WebAPIDemo.Controllers
     {
         private Database db = new Database();
 
-        private readonly ILogger<Test> _logger;
+        private readonly ILogger<Student> _logger;
 
-        public StudentController(ILogger<Test> logger)
+        public StudentController(ILogger<Student> logger)
         {
             _logger = logger;
         }
@@ -93,7 +93,9 @@ namespace WebAPIDemo.Controllers
             if (studentDetailsUpdateRequest!=null && studentDetailsUpdateRequest.ID>0)
             {
                 string query = Queries.GetQuery(200);
-                query=query.Replace("{id}", studentDetailsUpdateRequest.ID.ToString());
+
+                #region Update query parameters
+                query = query.Replace("{id}", studentDetailsUpdateRequest.ID.ToString());
                 if (!string.IsNullOrWhiteSpace(studentDetailsUpdateRequest.Name))
                 {
                     query = query.Replace("{name}", studentDetailsUpdateRequest.Name);
@@ -104,7 +106,7 @@ namespace WebAPIDemo.Controllers
                 }
                 if (studentDetailsUpdateRequest.DOB != null)
                 {
-                    query = query.Replace("{dob}", studentDetailsUpdateRequest.DOB.GetValueOrDefault().Year.ToString() + "/" + (studentDetailsUpdateRequest.DOB.GetValueOrDefault().Month).ToString() + "/" +studentDetailsUpdateRequest.DOB.GetValueOrDefault().Day.ToString());
+                    query = query.Replace("{dob}", studentDetailsUpdateRequest.DOB.GetValueOrDefault().Year.ToString() + "/" + (studentDetailsUpdateRequest.DOB.GetValueOrDefault().Month).ToString() + "/" + studentDetailsUpdateRequest.DOB.GetValueOrDefault().Day.ToString());
                 }
                 else
                 {
@@ -117,7 +119,8 @@ namespace WebAPIDemo.Controllers
                 else
                 {
                     query = query.Replace("{score}", "NULL");
-                }
+                } 
+                #endregion
                 int rows = db.UpdateData(query);
                 updated = rows>0?true:false;
             }
