@@ -33,40 +33,49 @@ namespace WebAPIDemo.Controllers
         private Database db = new Database();
 
         /// <summary>
-        /// Get Students list
+        /// Get Students list - Async
         /// </summary>
         /// <returns></returns>
 
         [Route("api/Students/GetAllStudents")]
+        [ProducesResponseType(typeof(StudentDetailsResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [HttpGet]
-        public StudentDetailsResponse GetAllStudents()
+        public async Task<IActionResult> GetAllStudents()
         {
-            StudentDetailsResponse studentsResponse = _studentService.GetAllStudents();
-
-            return studentsResponse;
+            var task = Task.Run(() => _studentService.GetAllStudents());
+            StudentDetailsResponse studentsResponse = await task;
+            if (studentsResponse == null || studentsResponse.students==null || studentsResponse.students.Count==0)
+            {
+                return NoContent();
+            }
+            return Ok(studentsResponse);
 
         }
         /// <summary>
-        /// Get details of particular student
+        /// Get details of particular student(async task)
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
         [Route("api/Students/GetStudent/{ID}")]
+        [ProducesResponseType(typeof(StudentDetailsResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [HttpGet]
-        public StudentDetailsResponse GetStudentDetails([Required] int ID)
+        public async Task<IActionResult> GetStudentDetails([Required] int ID)
         {
             StudentDetailsResponse studentsResponse = new StudentDetailsResponse();
             if (ID > 0)
             {
-                studentsResponse = _studentService.GetStudentDetails(ID);
-                //if (!(studentsResponse != null && studentsResponse.students != null && studentsResponse.students.Count > 0))
-                //{
-                //  //throw new System.Web.Http.HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound) { Content=new StringContent("ID " + ID + " does not exists."),ReasonPhrase="Student details not found" });
-                //}
+                var task = Task.Run(() => _studentService.GetStudentDetails(ID));
+                studentsResponse = await task;
+                if (!(studentsResponse != null && studentsResponse.students != null && studentsResponse.students.Count > 0))
+                {
+                    return NoContent();
+                }
             }
 
 
-            return studentsResponse;
+            return Ok(studentsResponse);
 
         }
         /// <summary>

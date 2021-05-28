@@ -69,3 +69,4 @@ N:\Work\Git\WebAPIDemo\obj\Debug\netcoreapp3.1\WebAPIDemo.csproj.CopyComplete
 N:\Work\Git\WebAPIDemo\obj\Debug\netcoreapp3.1\WebAPIDemo.dll
 N:\Work\Git\WebAPIDemo\obj\Debug\netcoreapp3.1\WebAPIDemo.pdb
 N:\Work\Git\WebAPIDemo\obj\Debug\netcoreapp3.1\WebAPIDemo.genruntimeconfig.cache
+N:\Work\Git\WebAPIDemo\obj\Debug\netcoreapp3.1\WebAPIDemo.csprojAssemblyReference.cache
