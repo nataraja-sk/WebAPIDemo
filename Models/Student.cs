@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using WebAPIDemo.Helpers;
 
 namespace WebAPIDemo.Models
 {
@@ -33,16 +34,22 @@ namespace WebAPIDemo.Models
     {
         [Required]
         public int ID { get; set; }
+        [StringLength(50, MinimumLength = 2)]
         public string? Name { get; set; }
+        [CustomDateRangeAttribute]
         public DateTime? DOB { get; set; }
+        [Range(0, 100)]
         public int? Score { get; set; }
     }
     public class AddStudentRequest
     {
         [Required]
+        [StringLength(50, MinimumLength = 2)]
         public string Name { get; set; }
         [Required]
+        [CustomDateRangeAttribute]
         public DateTime DOB { get; set; }
+        [Range(0, 100)]
         public int? Score { get; set; }
     }
 }

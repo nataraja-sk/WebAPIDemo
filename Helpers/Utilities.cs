@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Linq;
 using System.Reflection;
@@ -7,6 +8,14 @@ using System.Threading.Tasks;
 
 namespace WebAPIDemo.Helpers
 {
+    public class CustomDateRangeAttribute : RangeAttribute
+    {
+        public CustomDateRangeAttribute()
+          : base(typeof(DateTime),
+                  DateTime.Now.AddYears(-50).ToShortDateString(),
+                  DateTime.Now.AddYears(-5).ToShortDateString())
+        { }
+    }
     public static class Utilities
     {
         public static List<T> ConvertDataTable<T>(DataTable dt)
